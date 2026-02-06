@@ -32453,6 +32453,12 @@ spec:
       - args:
         - /usr/local/bin/argocd-applicationset-controller
         env:
+        - name: http_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: GRPC_ENABLE_TXT_SERVICE_CONFIG
           valueFrom:
             configMapKeyRef:
@@ -32724,6 +32730,12 @@ spec:
         - /shared/argocd-dex
         - rundex
         env:
+        - name: http_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: ARGOCD_DEX_SERVER_LOGFORMAT
           valueFrom:
             configMapKeyRef:
@@ -32837,6 +32849,12 @@ spec:
       - args:
         - /usr/local/bin/argocd-notifications
         env:
+        - name: http_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: ARGOCD_NOTIFICATIONS_CONTROLLER_LOGFORMAT
           valueFrom:
             configMapKeyRef:
@@ -33081,6 +33099,12 @@ spec:
       - args:
         - /usr/local/bin/argocd-repo-server
         env:
+        - name: http_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -33470,6 +33494,12 @@ spec:
       - args:
         - /usr/local/bin/argocd-server
         env:
+        - name: http_proxy
+            value:"http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+            value:"http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: ARGOCD_API_SERVER_REPLICAS
           value: "2"
         - name: REDIS_PASSWORD
@@ -33888,6 +33918,12 @@ spec:
       - args:
         - /usr/local/bin/argocd-application-controller
         env:
+        - name: http_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: https_proxy
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+        - name: no_proxy
+          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
