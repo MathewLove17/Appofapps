@@ -1,25 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apigee-crds
+  name: apigee-datastore
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   project: default
   source:
     repoURL: https://github.com/MathewLove17/apigeehybrid.git
     targetRevision: HEAD
-    path: charts/apigee-operator/etc/crds/crd/bases
-    directory:
-      recurse: true
+    path: charts/apigee-datastore
+    helm:
+      valueFiles:
+        - ../../overrides/overrides-nonprod.yaml
   destination:
     server: https://4436BE938FD7C315B2A4F218BE01A0A0.gr7.eu-central-1.eks.amazonaws.com
-    namespace: apigee   # da igual, CRDs son cluster-scoped
+    namespace: apigee
   syncPolicy:
-    syncOptions:
-      - ServerSideApply=true
-      - Validate=false
     automated:
-      prune: false      # recomendado: no “prunear” CRDs alegremente
+      prune: true
       selfHeal: true
