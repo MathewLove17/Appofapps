@@ -32458,7 +32458,7 @@ spec:
         - name: https_proxy
           value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
         - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
+          value: "localhost,127.0.0.1,.svc,.cluster.local,kubernetes.default.svc,apis.allianz,.argocd.svc,argocd-server,argocd-repo-server,argocd-dex-server,argocd-redis,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
         - name: GRPC_ENABLE_TXT_SERVICE_CONFIG
           valueFrom:
             configMapKeyRef:
@@ -32529,10 +32529,52 @@ spec:
               key: log.format.timestamp
               name: argocd-cmd-params-cm
               optional: true
+        - name: ARGOCD_K8S_CLIENT_QPS
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.client.qps
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_BURST
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.client.burst
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_MAX_IDLE_CONNECTIONS
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.client.max.idle.connections
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.tcp.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_KEEPALIVE
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.tcp.keepalive
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TLS_HANDSHAKE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.tls.handshake.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_IDLE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: applicationsetcontroller.k8s.tcp.idle.timeout
+              name: argocd-cmd-params-cm
+              optional: true
         - name: ARGOCD_APPLICATIONSET_CONTROLLER_DRY_RUN
           valueFrom:
             configMapKeyRef:
-              key: applicationsetcontroller.dryrun
+              key: applicationsetcontroller.dryrun2
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_GIT_MODULES_ENABLED
@@ -32730,12 +32772,6 @@ spec:
         - /shared/argocd-dex
         - rundex
         env:
-        - name: http_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: https_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: ARGOCD_DEX_SERVER_LOGFORMAT
           valueFrom:
             configMapKeyRef:
@@ -32849,12 +32885,6 @@ spec:
       - args:
         - /usr/local/bin/argocd-notifications
         env:
-        - name: http_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: https_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: ARGOCD_NOTIFICATIONS_CONTROLLER_LOGFORMAT
           valueFrom:
             configMapKeyRef:
@@ -33099,12 +33129,6 @@ spec:
       - args:
         - /usr/local/bin/argocd-repo-server
         env:
-        - name: http_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: https_proxy
-          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
-        - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -33495,11 +33519,11 @@ spec:
         - /usr/local/bin/argocd-server
         env:
         - name: http_proxy
-            value:"http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
         - name: https_proxy
-            value:"http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
+          value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
         - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
+          value: "localhost,127.0.0.1,.svc,.cluster.local,kubernetes.default.svc,apis.allianz,.argocd.svc,argocd-server,argocd-repo-server,argocd-dex-server,argocd-redis,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
         - name: ARGOCD_API_SERVER_REPLICAS
           value: "2"
         - name: REDIS_PASSWORD
@@ -33541,6 +33565,48 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: server.log.level
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_QPS
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.client.qps
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_BURST
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.client.burst
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_MAX_IDLE_CONNECTIONS
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.client.max.idle.connections
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.tcp.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_KEEPALIVE
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.tcp.keepalive
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TLS_HANDSHAKE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.tls.handshake.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_IDLE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: server.k8s.tcp.idle.timeout
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_SERVER_REPO_SERVER
@@ -33923,7 +33989,7 @@ spec:
         - name: https_proxy
           value: "http://proxy-gamp-hybrid-d2vpp.internet-dev.ec1.aws.aztec.cloud.allianz:8080"
         - name: no_proxy
-          value: "localhost,127.0.0.1,apis.allianz,10.100.0.0/16"
+          value: "localhost,127.0.0.1,.svc,.cluster.local,kubernetes.default.svc,apis.allianz,.argocd.svc,argocd-server,argocd-repo-server,argocd-dex-server,argocd-redis,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
         - name: REDIS_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -34001,6 +34067,48 @@ spec:
           valueFrom:
             configMapKeyRef:
               key: log.format.timestamp
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_QPS
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.client.qps
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_BURST
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.client.burst
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_CLIENT_MAX_IDLE_CONNECTIONS
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.client.max.idle.connections
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.tcp.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_KEEPALIVE
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.tcp.keepalive
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TLS_HANDSHAKE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.tls.handshake.timeout
+              name: argocd-cmd-params-cm
+              optional: true
+        - name: ARGOCD_K8S_TCP_IDLE_TIMEOUT
+          valueFrom:
+            configMapKeyRef:
+              key: controller.k8s.tcp.idle.timeout
               name: argocd-cmd-params-cm
               optional: true
         - name: ARGOCD_APPLICATION_CONTROLLER_METRICS_CACHE_EXPIRATION
