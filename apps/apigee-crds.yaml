@@ -17,6 +17,8 @@ spec:
     server: https://4436BE938FD7C315B2A4F218BE01A0A0.gr7.eu-central-1.eks.amazonaws.com
     namespace: apigee   # da igual, CRDs son cluster-scoped
   syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
     automated:
       prune: false      # recomendado: no “prunear” CRDs alegremente
       selfHeal: true
