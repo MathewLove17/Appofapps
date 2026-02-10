@@ -12,7 +12,7 @@ spec:
     directory:
       recurse: true
   destination:
-    server: hhttps://4436BE938FD7C315B2A4F218BE01A0A0.gr7.eu-central-1.eks.amazonaws.com
+    server:  https://4436BE938FD7C315B2A4F218BE01A0A0.gr7.eu-central-1.eks.amazonaws.com
     namespace: cert-manager
   syncPolicy:
     automated:
