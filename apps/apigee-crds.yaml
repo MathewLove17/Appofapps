@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/MathewLove17/apigeehybrid.git
     targetRevision: HEAD
-    path: charts/apigee-operator/etc/crds/crd/bases
+    path: charts/apigee-operator/etc/crds/default
     directory:
       recurse: true
   destination:
@@ -20,6 +20,7 @@ spec:
     syncOptions:
       - ServerSideApply=true
       - Validate=false
+      - Force=true
     automated:
       prune: false      # recomendado: no “prunear” CRDs alegremente
       selfHeal: true
